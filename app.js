@@ -99,11 +99,12 @@ function getMessages (req, res) {
 
 function addNewMessage(req,res) {
   console.log(req.body);
-
-  var newMessage = new Message ({
-    user: 'TEST99',
-    message: 'Hello world99'
-  });
+  if(req.body.user && req.body.message) {
+    var newMessage = new Message ({
+      user: req.body.user,
+      message: req.body.message
+    });
+  }
   newMessage.save(function (err) {if (err) console.log ('Error on save!')});
 
   getMessages(req,res);
