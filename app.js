@@ -95,6 +95,7 @@ function getMessages (req, res) {
 
 function addNewMessage(req,res) {
   console.log(req.body);
+  console.log(req);
 
   var newMessage = new Message ({
     user: 'TEST99',
