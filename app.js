@@ -69,7 +69,7 @@ var found = ['DB Connection not yet established.  Try again later.  Check the co
 
 const app = express()
 app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(theport, () => console.log('Example app listening on port 3000!'))
 
 
 
