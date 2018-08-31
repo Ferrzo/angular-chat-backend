@@ -72,6 +72,7 @@ app.get('/', (req, res) => {
   res.send("Hello world!");
 });
 app.get('/messages',(req,res) => {
+  console.log('get messages')
   getMessages(req,res);
 });
 app.post('/messages',(req,res) => {
@@ -85,6 +86,7 @@ function getMessages (req, res) {
   // Let's find all the documents
   Message.find({}).exec(function(err, result) {
     if (!err) {
+      res.writeHead(200, {'Content-Type': 'application/json'});
       res.write(JSON.stringify(result));
     } else {
       res.end('Error in first query. ' + err)
