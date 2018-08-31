@@ -90,6 +90,7 @@ function getMessages (req, res) {
     if (!err) {
       res.writeHead(200, {'Content-Type': 'application/json'});
       res.write(JSON.stringify(result));
+      res.end()
     } else {
       res.end('Error in first query. ' + err)
     };
