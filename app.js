@@ -1,7 +1,6 @@
 
 //
 // Preamble
-var http = require ('http');	     // For serving a basic web page.
 var mongoose = require ("mongoose"); // The reason for this demo.
 var express = require('express');
 var parser = require('body-parser');
@@ -37,23 +36,6 @@ var messageSchema = new mongoose.Schema({
 });
 
 var Message = mongoose.model('Messages', messageSchema);
-
-// Clear out old data
-// Message.remove({}, function(err) {
-//   if (err) {
-//     console.log ('error deleting old data.');
-//   }
-// });
-
-// Creating one user.
-// var test = new Message ({
-//   user: 'TEST',
-//   message: 'Hello world'
-// });
-
-// Saving it to the database.
-// test.save(function (err) {if (err) console.log ('Error on save!')});
-
 
 // In case the browser connects before the database is connected, the
 // user will see this message.
