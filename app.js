@@ -4,6 +4,7 @@
 var http = require ('http');	     // For serving a basic web page.
 var mongoose = require ("mongoose"); // The reason for this demo.
 var express = require('express');
+var parser = require('body-parser');
 
 // Here we find an appropriate database to connect to, defaulting to
 // localhost if we don't find one.
@@ -68,6 +69,7 @@ var found = ['DB Connection not yet established.  Try again later.  Check the co
 // }).listen(theport);
 
 const app = express()
+app.use(parser.json({extended : true}));
 app.get('/', (req, res) => {
   res.send("Hello world!");
 });
@@ -82,6 +84,7 @@ app.listen(theport, () => console.log('http server will be listening on port %d'
 
 
 function getMessages (req, res) {
+
   // Let's find all the documents
   Message.find({}).exec(function(err, result) {
     if (!err) {
@@ -95,7 +98,6 @@ function getMessages (req, res) {
 
 function addNewMessage(req,res) {
   console.log(req.body);
-  console.log(req);
 
   var newMessage = new Message ({
     user: 'TEST99',
