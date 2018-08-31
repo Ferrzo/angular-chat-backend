@@ -59,14 +59,6 @@ var Message = mongoose.model('Messages', messageSchema);
 // user will see this message.
 var found = ['DB Connection not yet established.  Try again later.  Check the console output for error messages if this persists.'];
 
-// Create a rudimentary http server.  (Note, a real web application
-// would use a complete web framework and router like express.js).
-// This is effectively the main interaction loop for the application.
-// As new http requests arrive, the callback function gets invoked.
-// http.createServer(function (req, res) {
-//   res.writeHead(200, {'Content-Type': 'text/html'});
-//   createWebpage(req, res);
-// }).listen(theport);
 
 const app = express()
 app.use(parser.json({extended : true}));
@@ -104,18 +96,9 @@ function addNewMessage(req,res) {
       user: req.body.user,
       message: req.body.message
     });
+    newMessage.save(function (err) {if (err) {console.log ('Error on save!')} else {getMessages(req,res)}});
   }
-  newMessage.save(function (err) {if (err) console.log ('Error on save!')});
-
-  getMessages(req,res);
 }
-
-
-
-
-
-
-
 
 
 // Tell the console we're getting ready.
