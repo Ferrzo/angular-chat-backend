@@ -72,7 +72,6 @@ app.get('/', (req, res) => {
   res.send("Hello world!");
 });
 app.get('/messages',(req,res) => {
-  console.log('get messages')
   getMessages(req,res);
 });
 app.post('/messages',(req,res) => {
@@ -95,7 +94,7 @@ function getMessages (req, res) {
 }
 
 function addNewMessage(req,res) {
-  console.log(req.params);
+  console.log(req.body);
 
   var newMessage = new Message ({
     user: 'TEST99',
