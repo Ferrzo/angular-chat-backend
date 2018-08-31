@@ -101,7 +101,7 @@ http.createServer(function (req, res) {
 
 function createWebpage (req, res) {
   // Let's find all the documents
-  PUser.find({}).exec(function(err, result) {
+  Message.find({}).exec(function(err, result) {
     if (!err) {
       res.write(JSON.stringify(result));
     } else {
