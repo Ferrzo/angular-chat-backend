@@ -1,41 +1,9 @@
-//
-// hello-mongoose: MongoDB with Mongoose on Node.js example on Heroku.
-// Mongoose is a object/data mapping utility for the MongoDB database.
-//
-
-// by Ben Wen with thanks to Aaron Heckmann
-
-//
-// Copyright 2015 ObjectLabs Corp.
-// ObjectLabs operates MongoLab.com a MongoDb-as-a-Service offering
-//
-// MIT Licensed
-//
-
-// Permission is hereby granted, free of charge, to any person
-// obtaining a copy of this software and associated documentation files
-// (the "Software"), to deal in the Software without restriction,
-// including without limitation the rights to use, copy, modify, merge,
-// publish, distribute, sublicense, and/or sell copies of the Software,
-// and to permit persons to whom the Software is furnished to do so,
-// subject to the following conditions:
-
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
-// BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
-// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
 
 //
 // Preamble
 var http = require ('http');	     // For serving a basic web page.
 var mongoose = require ("mongoose"); // The reason for this demo.
+var express = require('express');
 
 // Here we find an appropriate database to connect to, defaulting to
 // localhost if we don't find one.
@@ -94,10 +62,16 @@ var found = ['DB Connection not yet established.  Try again later.  Check the co
 // would use a complete web framework and router like express.js).
 // This is effectively the main interaction loop for the application.
 // As new http requests arrive, the callback function gets invoked.
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  createWebpage(req, res);
-}).listen(theport);
+// http.createServer(function (req, res) {
+//   res.writeHead(200, {'Content-Type': 'text/html'});
+//   createWebpage(req, res);
+// }).listen(theport);
+
+const app = express()
+app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
+
+
 
 function createWebpage (req, res) {
   // Let's find all the documents
@@ -110,9 +84,17 @@ function createWebpage (req, res) {
   });
 }
 
+
+
+
+
+
+
+
+
 // Tell the console we're getting ready.
 // The listener in http.createServer should still be active after these messages are emitted.
 console.log('http server will be listening on port %d', theport);
-console.log('CTRL+C to exit');
+
 
 
