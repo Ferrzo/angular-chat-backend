@@ -38,20 +38,20 @@ var messageSchema = new mongoose.Schema({
 var Message = mongoose.model('Messages', messageSchema);
 
 // Clear out old data
-Message.remove({}, function(err) {
-  if (err) {
-    console.log ('error deleting old data.');
-  }
-});
+// Message.remove({}, function(err) {
+//   if (err) {
+//     console.log ('error deleting old data.');
+//   }
+// });
 
 // Creating one user.
-var test = new Message ({
-  user: 'TEST',
-  message: 'Hello world'
-});
+// var test = new Message ({
+//   user: 'TEST',
+//   message: 'Hello world'
+// });
 
 // Saving it to the database.
-test.save(function (err) {if (err) console.log ('Error on save!')});
+// test.save(function (err) {if (err) console.log ('Error on save!')});
 
 
 // In case the browser connects before the database is connected, the
@@ -68,12 +68,20 @@ var found = ['DB Connection not yet established.  Try again later.  Check the co
 // }).listen(theport);
 
 const app = express()
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(theport, () => console.log('Example app listening on port 3000!'))
+app.get('/', (req, res) => {
+  res.send("Hello world!");
+});
+app.get('/messages',(req,res) => {
+  getMessages(req,res);
+});
+app.post('/messages',(req,res) => {
+  addNewMessage(req,res)
+});
+app.listen(theport, () => console.log('http server will be listening on port %d', theport));
 
 
 
-function createWebpage (req, res) {
+function getMessages (req, res) {
   // Let's find all the documents
   Message.find({}).exec(function(err, result) {
     if (!err) {
@@ -82,6 +90,18 @@ function createWebpage (req, res) {
       res.end('Error in first query. ' + err)
     };
   });
+}
+
+function addNewMessage(req,res) {
+  console.log(req.params);
+
+  var newMessage = new Message ({
+    user: 'TEST99',
+    message: 'Hello world99'
+  });
+  newMessage.save(function (err) {if (err) console.log ('Error on save!')});
+
+  getMessages(req,res);
 }
 
 
