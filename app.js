@@ -46,8 +46,9 @@ const app = express()
 
 app.use(function(req,res,next) {
   parser.json({extended: true});
-  res.header("Access-Control-Allow-Origin", '*');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader("Access-Control-Allow-Origin", '*');
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET');
   next();
 })
 // app.use(parser.json({extended : true}));
