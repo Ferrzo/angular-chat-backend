@@ -80,7 +80,7 @@ function getMessages (req, res) {
 
 function addNewMessage(req,res) {
   console.log(req.body);
-  if(req.body.user && req.body.message) {
+  if(req.body && (req.body.user && req.body.message)) {
     var newMessage = new Message ({
       user: req.body.user,
       message: req.body.message
