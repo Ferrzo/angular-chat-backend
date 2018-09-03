@@ -43,7 +43,13 @@ var found = ['DB Connection not yet established.  Try again later.  Check the co
 
 
 const app = express()
-app.use(parser.json({extended : true}));
+
+app.use(function(req,res,next) {
+  parser.json({extended: true});
+  res.header("Access-Control-Allow-Origin", '*');
+  next();
+})
+// app.use(parser.json({extended : true}));
 app.get('/', (req, res) => {
   res.send("Hello world!");
 });
