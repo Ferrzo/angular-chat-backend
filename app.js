@@ -41,13 +41,12 @@ var Message = mongoose.model('Messages', messageSchema);
 // user will see this message.
 var found = ['DB Connection not yet established.  Try again later.  Check the console output for error messages if this persists.'];
 
-
 const app = express()
 app.use(parser.json()); // support json encoded bodies
 app.use(parser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use(function(req,res,next) {
-  parser.json({extended: true});
+  // parser.json({extended: true});
   res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
@@ -66,11 +65,7 @@ app.post('/messages',(req,res) => {
 });
 app.listen(theport, () => console.log('http server will be listening on port %d', theport));
 
-
-
 function getMessages (req, res) {
-
-  // Let's find all the documents
   Message.find({}).exec(function(err, result) {
     if (!err) {
       res.writeHead(200, {'Content-Type': 'application/json'});
@@ -90,12 +85,10 @@ function addNewMessage(req,res) {
       message: req.body.message
     });
     newMessage.save(function (err) {if (err) {console.log ('Error on save!')} else {
-      console.log('save ok');
       getMessages(req,res);
     }});
   }
 }
-
 
 // Tell the console we're getting ready.
 // The listener in http.createServer should still be active after these messages are emitted.
