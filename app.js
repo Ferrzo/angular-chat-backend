@@ -43,6 +43,8 @@ var found = ['DB Connection not yet established.  Try again later.  Check the co
 
 
 const app = express()
+app.use(parser.json()); // support json encoded bodies
+app.use(parser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use(function(req,res,next) {
   parser.json({extended: true});
