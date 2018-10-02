@@ -59,7 +59,7 @@ app.get('/messages',(req,res) => {
   getMessages(req,res);
 });
 app.post('/messages',(req,res) => {
-  console.log(req);
+  console.log(req.body);
   addNewMessage(req,res)
 });
 app.listen(theport, () => console.log('http server will be listening on port %d', theport));
