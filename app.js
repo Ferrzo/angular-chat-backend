@@ -59,6 +59,7 @@ app.get('/messages',(req,res) => {
   getMessages(req,res);
 });
 app.post('/messages',(req,res) => {
+  console.log(req);
   addNewMessage(req,res)
 });
 app.listen(theport, () => console.log('http server will be listening on port %d', theport));
@@ -86,7 +87,10 @@ function addNewMessage(req,res) {
       user: req.body.user,
       message: req.body.message
     });
-    newMessage.save(function (err) {if (err) {console.log ('Error on save!')} else {getMessages(req,res)}});
+    newMessage.save(function (err) {if (err) {console.log ('Error on save!')} else {
+      console.log('save ok');
+      getMessages(req,res);
+    }});
   }
 }
 
